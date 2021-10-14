@@ -7,22 +7,22 @@ public class BallController : MonoBehaviour
 {
     private float visiblePosZ = -6.5f;
 
-    int score;
-
     private GameObject gameoverText;
-    private GameObject ScoreText;
+    private GameObject pointText;
+    private int score = 0;
 
     void ScorePoint(int score)
     {
-        this.ScoreText.GetComponent<Text>().text = "Score" + this.score;
+        this.pointText.GetComponent<Text>().text = "Score" + this.score;
     }
     
     // Start is called before the first frame update
     void Start()
     {
         this.gameoverText = GameObject.Find("GameOverText");
-        this.ScoreText = GameObject.Find("ScoreText");
+        this.pointText = GameObject.Find("PointText");
 
+        score = 0;
         ScorePoint(score);
     }
 
@@ -47,7 +47,7 @@ public class BallController : MonoBehaviour
             this.score += 20;
         }
 
-        else if(other.gameObject.tag == "SmallClaudTag")
+        else if(other.gameObject.tag == "SmallCloudTag")
         {
             this.score += 10;
         }
@@ -56,5 +56,7 @@ public class BallController : MonoBehaviour
         {
             this.score += 15;
         }
+
+        ScorePoint(score);
     }
 }
